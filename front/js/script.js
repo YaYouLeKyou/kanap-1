@@ -1,3 +1,11 @@
+//cour DOM: https://www.youtube.com/watch?v=_TLmWaaJPV4&list=PLeHV46kDFIhK6NlpLJqLxjVanTWMast_8&index=7
+//cour Fetch: https://www.youtube.com/watch?v=b0dPBK37-M8&list=PLeHV46kDFIhK6NlpLJqLxjVanTWMast_8&index=15
+//API-meteo: https://www.youtube.com/watch?v=mYGwt0Vyovw&list=PLeHV46kDFIhK6NlpLJqLxjVanTWMast_8&index=17
+//FS JS de A a Z: https://www.youtube.com/watch?v=9OJLxDxyNg4
+//Projet similaire: https://www.youtube.com/watch?v=5_itnizDhxc&list=PLCdVnVTnpzNSd2Wvsf-8TnVXxBQ9iyIb9&index=3
+//JS cheat sheet: https://htmlcheatsheet.com/js/
+
+
 // Récupération des données de l'API
 fetch("http://localhost:3000/api/products/")
   .then(function(response) { //Version courte : .then((response) => response.json())

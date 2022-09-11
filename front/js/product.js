@@ -1,3 +1,5 @@
+//cour: https://www.youtube.com/watch?v=JPOKfLekQt0
+
 // Récupération de l'ID du produit
 const getProductId = () => {
   return new URL(location.href).searchParams.get("id");
@@ -37,6 +39,8 @@ let selectedProduct = (product) => {
   document.querySelector("#description").textContent += product.description;
 
   // Boucle intégrant les différentes couleurs du produit dans le HTML
+  //cour: https://www.youtube.com/watch?v=d7goZZ7mjmA
+
   for (color of product.colors) {
     let option = document.createElement("option");
     option.innerHTML = `${color}`;
@@ -46,6 +50,8 @@ let selectedProduct = (product) => {
 };
 
 // Fonction qui enregistre dans un objet les options de l'utilisateur au click sur le bouton ajouter au panier
+//cour: https://www.youtube.com/watch?v=KM9XbOEFgCg
+
 let registredProduct = (product) => {
   // Écoute de l'évènement click sur le bouton ajouter
   button.addEventListener("click", (event) => {
@@ -70,7 +76,42 @@ let registredProduct = (product) => {
       };
       console.log(selectedProduct);
 
+       /**** Gestion du localStorage ****/
+      //cour: https://www.youtube.com/watch?v=vKrdqbBK_tE
+
+      // Récupération des données du localStorage
+      let existingCart = JSON.parse(localStorage.getItem("cart"));
+
+      // Si le localStorage existe
+      if (existingCart) {
+        console.log("Il y a déjà un produit dans le panier, on compare les données");
+        // On recherche avec la méthode find() si l'id et la couleur d'un article sont déjà présents
+        let item = existingCart.find(
+          (item) =>
+            item.id == selectedProduct.id && item.color == selectedProduct.color
+        );
+        // Si oui, on incrémente la nouvelle quantité et la mise à jour du prix total de l'article
+        if (item) {
+          item.quantity = item.quantity + selectedProduct.quantity;
+          item.totalPrice += item.price * selectedProduct.quantity;
+          localStorage.setItem("cart", JSON.stringify(existingCart));
+          console.log("Quantité supplémentaire dans le panier.");
+          return;
+        }
+        // Si non, alors on push le nouvel article sélectionné
+        existingCart.push(selectedProduct);
+        localStorage.setItem("cart", JSON.stringify(existingCart));
+        console.log("Le produit a été ajouté au panier");
+
+      } else {
+        // Sinon création d'un tableau dans le lequel on push l'objet "selectedProduct"
+        let createLocalStorage = [];
+        createLocalStorage.push(selectedProduct);
+        localStorage.setItem("cart", JSON.stringify(createLocalStorage));
+        console.log("Le panier est vide, on ajoute le premier produit");
+      }
       
     }
   });
 };
+ //cour localStorage: https://www.youtube.com/watch?v=JOik3MMZ_PY
