@@ -73,6 +73,7 @@ let registredProduct = (product) => {
         img: product.imageUrl,
         altTxt: product.altTxt,
         description: product.description,
+        price: product.price,
         color: selectedColor.value,
         quantity: parseInt(selectedQuantity.value, 10),
       };
