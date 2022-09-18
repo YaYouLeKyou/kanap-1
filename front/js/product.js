@@ -1,10 +1,12 @@
 //cour: https://www.youtube.com/watch?v=JPOKfLekQt0
 
-// Récupération de l'ID du produit
+// Récupération de l'ID
 const getProductId = () => {
   return new URL(location.href).searchParams.get("id");
 };
 const productId = getProductId();
+
+//On insère de façon dynamique la valeur de productId a la suite de l' adresse http
 
 fetch(`http://localhost:3000/api/products/${productId}`)
   .then((response) => {
@@ -33,7 +35,7 @@ let selectedProduct = (product) => {
   // Intégration des données du produit sélectionné dans la page HTML
   document.querySelector("head > title").textContent = product.name;
   document.querySelector(".item__img")
-  .innerHTML += `<img src="${product.imageUrl}" alt="${product.altTxt}">`;
+    .innerHTML += `<img src="${product.imageUrl}" alt="${product.altTxt}">`;
   document.querySelector("#title").textContent += product.name;
   document.querySelector("#price").textContent += product.price;
   document.querySelector("#description").textContent += product.description;
@@ -76,7 +78,7 @@ let registredProduct = (product) => {
       };
       console.log(selectedProduct);
 
-       /**** Gestion du localStorage ****/
+      /**** Gestion du localStorage ****/
       //cour: https://www.youtube.com/watch?v=vKrdqbBK_tE
 
       // Récupération des données du localStorage
@@ -88,7 +90,7 @@ let registredProduct = (product) => {
         // On recherche avec la méthode find() si l'id et la couleur d'un article sont déjà présents
         let item = existingCart.find(
           (item) =>
-            item.id == selectedProduct.id && item.color == selectedProduct.color
+          item.id == selectedProduct.id && item.color == selectedProduct.color
         );
         // Si oui, on incrémente la nouvelle quantité et la mise à jour du prix total de l'article
         if (item) {
@@ -110,8 +112,11 @@ let registredProduct = (product) => {
         localStorage.setItem("cart", JSON.stringify(createLocalStorage));
         console.log("Le panier est vide, on ajoute le premier produit");
       }
-      
+
     }
   });
 };
- //cour localStorage: https://www.youtube.com/watch?v=JOik3MMZ_PY
+//cour localStorage: https://www.youtube.com/watch?v=JOik3MMZ_PY
+//localStorage.setItem("clé","valeur")
+//localStorage.getItem("clé")
+//localStorage.clear()
