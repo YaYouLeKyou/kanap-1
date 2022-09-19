@@ -43,7 +43,6 @@ async function displayCart() {
   // Si le localstorage contient des produits
   for (i = 0; i < cart.length; i++) {
     const product = await getProductById(cart[i].id);
-    console.log(getProductById(cart[i].id))
     const totalPriceItem = (product.price *= cart[i].quantity);
     cartArray += `<article class="cart__item" data-id="${cart[i].id}" data-color="${cart[i].color}">
                   <div class="cart__item__img">
@@ -80,4 +79,16 @@ async function displayCart() {
     cartItems.appendChild(displayBasket.body);
 
   }
+  // Boucle d'affichage du nombre total d'articles dans le panier et de la somme totale
+  let totalQuantity = 0;
+  let totalPrice = 0;
+
+  for (i = 0; i < cart.length; i++) {
+    const article = await getProductById(cart[i].id);
+    totalQuantity += cart[i].quantity;
+    totalPrice += article.price * cart[i].quantity;
+  }
+
+  document.getElementById("totalQuantity").innerHTML = totalQuantity;
+  document.getElementById("totalPrice").innerHTML = totalPrice;
 }
